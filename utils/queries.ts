@@ -127,7 +127,8 @@ export const userCreatedPostsQuery = (userId: string | string[]) => {
       userName,
       image
     },
-    }
+    },
+    topic
   }`;
 
   return query;
