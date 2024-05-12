@@ -24,7 +24,8 @@ export const allPostsQuery = () => {
       image
     },
     },
-    topic
+    topic,
+    status
   }`;
 
   return query;
@@ -84,7 +85,9 @@ likes,
       userName,
       image
     },
-    }
+    },
+    topic,
+    status
   }`;
   return query;
 };
@@ -128,7 +131,8 @@ export const userCreatedPostsQuery = (userId: string | string[]) => {
       image
     },
     },
-    topic
+    topic,
+    status
   }`;
 
   return query;
@@ -160,7 +164,9 @@ export const userLikedPostsQuery = (userId: string | string[]) => {
       userName,
       image
     },
-    }
+    },
+    topic,
+    status
   }`;
 
   return query;
@@ -193,7 +199,8 @@ export const topicPostsQuery = (topic: string | string[]) => {
       image
     },
     },
-    topic
+    topic,
+    status
   }`;
 
   return query;

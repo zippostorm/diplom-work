@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { GoVerified } from "react-icons/go";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import VideoCard from "../../components/VideoCard";
 import NoResults from "../../components/NoResults";
 import { IUser, Video } from "../../types";
 import { BASE_URL } from "../../utils";
+import useAuthStore from "../../store/authStore";
 
-interface IProps{
+interface IProps {
   data: {
     user: IUser,
     userVideos: Video[],
@@ -26,12 +29,14 @@ const Profile = ({ data }: IProps) => {
   const liked = !showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
 
   useEffect(() => {
-    if(showUserVideos) {
+    if (showUserVideos) {
       setVideosList(userVideos);
     } else {
       setVideosList(userLikedVideos);
     }
-  }, [showUserVideos, userLikedVideos, userVideos])
+  }, [showUserVideos, userLikedVideos, userVideos]);
+
+  const allWaiting = videosList.every(video => video.status === 'waiting');
 
   return (
     <div className="w-full">
@@ -58,16 +63,20 @@ const Profile = ({ data }: IProps) => {
       </div>
       <div>
         <div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
-          <p className={`text-xl font-semibold cursor-pointer mt-2 ${videos}`} onClick={() => setShowUserVideos(true)}>Videos</p>
-          <p className={`text-xl font-semibold cursor-pointer mt-2 ${liked}`} onClick={() => setShowUserVideos(false)}>Liked</p>
+          <p className={`text-xl font-semibold cursor-pointer mt-2 ${videos}`} onClick={() => setShowUserVideos(true)}>Публікації</p>
+          <p className={`text-xl font-semibold cursor-pointer mt-2 ${liked}`} onClick={() => setShowUserVideos(false)}>Лайкнуті</p>
         </div>
 
         <div className="flex gap-6 flex-wrap md:justify-start">
-          {videosList.length > 0 ? (
-            videosList.map((post: Video, idx: number) => (
-              <VideoCard post={post} key={idx} />
-            ))
-          ) : <NoResults text={`No ${showUserVideos ? '' : 'Liked'} Posts Yet`} />}
+          {allWaiting ? (
+            <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} постів ще`} />
+          ) : (
+            videosList.length > 0 ? (
+              videosList.map((post: Video, idx: number) => (
+                <VideoCard post={post} key={idx} />
+              ))
+            ) : <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} постів ще`} />
+          )}
         </div>
       </div>
     </div>

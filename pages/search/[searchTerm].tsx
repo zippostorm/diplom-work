@@ -24,11 +24,14 @@ const Search = ({ videos }: { videos: Video[] }) => {
 
   const searchedAccounts = allUsers.filter((user: IUser) => user.userName.toLowerCase().includes(searchTerm.toLowerCase()));
 
+
+  const allWaiting = videos.every(video => video.status === 'waiting');
+
   return (
     <div className="w-full">
       <div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
-        <p className={`text-xl font-semibold cursor-pointer mt-2 ${accounts}`} onClick={() => setIsAccounts(true)}>Accounts</p>
-        <p className={`text-xl font-semibold cursor-pointer mt-2 ${isVideos}`} onClick={() => setIsAccounts(false)}>Videos</p>
+        <p className={`text-xl font-semibold cursor-pointer mt-2 ${accounts}`} onClick={() => setIsAccounts(true)}>Акаунти</p>
+        <p className={`text-xl font-semibold cursor-pointer mt-2 ${isVideos}`} onClick={() => setIsAccounts(false)}>Пости</p>
       </div>
       {isAccounts ? (
         <div className="md:mt-16">
@@ -57,15 +60,21 @@ const Search = ({ videos }: { videos: Video[] }) => {
                 </div>
               </Link>
             ))
-          ) : <NoResults text={`No post results for ${searchTerm}`} />}
+          ) : <NoResults text={`Немає акаунтів за запитом '${searchTerm}'`} />}
         </div>
       ) : (
         <div className="md:mt-16 flex flex-wrap gap-6 md:justify-start">
-          {videos.length ? (
-            videos.map((video: Video, idx) => (
-              <VideoCard post={video} key={idx} />
-            ))
-          ) : <NoResults text={`No post results for ${searchTerm}`} />}
+          {allWaiting ? (
+            <NoResults text={`Немає постів за запитом '${searchTerm}'`} />
+          ) : (
+            videos.length ? (
+              videos.map((video: Video, idx) => (
+                video.status === 'accepted' ? (
+                  <VideoCard post={video} key={idx} />
+                ) : null
+              ))
+            ) : <NoResults text={`Немає постів за запитом '${searchTerm}'`} />
+          )}
         </div>
       )}
     </div>

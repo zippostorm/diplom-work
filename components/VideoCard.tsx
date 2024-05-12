@@ -13,7 +13,6 @@ interface IProps {
 }
 
 const VideoCard: NextPage<IProps> = ({ post }) => {
-
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
@@ -38,6 +37,10 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
 
   const isImage = (url: string): boolean => {
     return url.includes('.jpg') || url.includes('.jpeg') || url.includes('.png') || url.includes('.gif');
+  }
+
+  if (post.status !== 'accepted') {
+    return null; // Якщо статус посту не "accepted", повертаємо null, щоб не рендерити компонент
   }
 
   return (

@@ -13,5 +13,13 @@ export default {
       title: 'Image',
       type: 'string',
     },
+    {
+      name: 'userType',
+      title: 'User Type',
+      type: 'string',
+      options: {
+        list: ['user', 'admin', 'moderator'],
+      },
+    },
   ],
 }

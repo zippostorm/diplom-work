@@ -18,6 +18,7 @@ const Upload = () => {
   const [caption, setCaption] = useState('');
   const [category, setCategory] = useState(topics[0].name);
   const [savingPost, setSavingPost] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const { userProfile }: { userProfile: any } = useAuthStore();
 
@@ -76,19 +77,32 @@ const Upload = () => {
           _type: 'postedBy',
           _ref: userProfile?._id
         },
-        topic: category
+        topic: category,
+        status: 'waiting'
       }
 
       await axios.post(`${BASE_URL}/api/post`, document);
-
-      router.push('/');
+      setShowNotification(true);
+      setCaption('');
+      setVideoAsset(undefined);
+      setCategory(topics[0].name);
+      setSavingPost(false);
+      setTimeout(() => {
+        setShowNotification(false);
+        router.push('/');
+      }, 8000);
     }
   }
 
   return (
     <div className='flex w-full h-full absolute left-0 top-[90px] mb-10 bg-[#F8F8F8] justify-center'>
-      <div className='bg-white rounded-lg xl:h-[80vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6'>
+      <div className='bg-white rounded-lg xl:h-[100%] w-[100%] flex gap-6 flex-wrap justify-center items-center p-14 pt-6'>
         <div>
+          {showNotification && (
+            <div className="bg-green-400 text-white px-4 py-2 rounded-md mb-4">
+              <p className='font-semibold'>Ваш пост відправлений на перевірку. Очікуйте.</p>
+            </div>
+          )}
           <div>
             <p className='text-2xl font-bold'>Завантажити Відео або Фото</p>
             <p className='text-md text-gray-400 mt-1'>Опублікуйте відео або фото у своєму обліковому записі</p>

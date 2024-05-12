@@ -28,6 +28,7 @@ export interface Video {
   }[];
   userId: string;
   topic: string;
+  status: string;
 }
 
 export interface IUser {
@@ -35,4 +36,5 @@ export interface IUser {
   _type: string;
   userName: string;
   image: string;
+  userType: string;
 }
