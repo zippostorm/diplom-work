@@ -64,7 +64,7 @@ const Admin = () => {
           <NoResults text='Немає постів які треба підтверджувати' />
         ) : (
           waitingPosts.map(post => (
-            <div key={post._id} className="mt-[50px] ml-4 border border-gray-200 p-4 rounded-lg shadow-md flex flex-col mb-4">
+            <div key={post._id} className="mt-[50px] ml-4 mr-4 border border-gray-200 p-4 rounded-lg shadow-md flex flex-col mb-4">
               <div className="mb-4">
                   <Link href={`/profile/${post.postedBy._id}`}>
                     <div className='flex flex-wrap gap-3 items-center mb-3'>
@@ -99,8 +99,8 @@ const Admin = () => {
                 )}
               </div>
               <div className="flex justify-between mt-4">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleAccept(post._id)}>Accept</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleDelete(post._id)}>Delete</button>
+                <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleAccept(post._id)}>Пост</button>
+                <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleDelete(post._id)}>Удалити</button>
               </div>
             </div>
           ))

@@ -4,6 +4,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
 import { SanityAssetDocument } from '@sanity/client';
+import { useToast } from "@/components/ui/use-toast";
 
 import useAuthStore from '../store/authStore';
 import { client } from '../utils/client';
@@ -18,13 +19,13 @@ const Upload = () => {
   const [caption, setCaption] = useState('');
   const [category, setCategory] = useState(topics[0].name);
   const [savingPost, setSavingPost] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
 
   const { userProfile }: { userProfile: any } = useAuthStore();
 
   const imageTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
   const router = useRouter();
+  const { toast } = useToast();
 
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
@@ -82,15 +83,17 @@ const Upload = () => {
       }
 
       await axios.post(`${BASE_URL}/api/post`, document);
-      setShowNotification(true);
+      toast({
+        title: "Ваш пост відправлений на перевірку. Очікуйте",
+        status: "success",
+        duration: 8000,
+        isClosable: true,
+      });
       setCaption('');
       setVideoAsset(undefined);
       setCategory(topics[0].name);
       setSavingPost(false);
-      setTimeout(() => {
-        setShowNotification(false);
-        router.push('/');
-      }, 8000);
+      router.push("/");
     }
   }
 
@@ -98,16 +101,11 @@ const Upload = () => {
     <div className='flex w-full h-full absolute left-0 top-[90px] mb-10 bg-[#F8F8F8] justify-center'>
       <div className='bg-white rounded-lg xl:h-[100%] w-[100%] flex gap-6 flex-wrap justify-center items-center p-14 pt-6'>
         <div>
-          {showNotification && (
-            <div className="bg-green-400 text-white px-4 py-2 rounded-md mb-4">
-              <p className='font-semibold'>Ваш пост відправлений на перевірку. Очікуйте.</p>
-            </div>
-          )}
-          <div>
+          <div className='ml-6'>
             <p className='text-2xl font-bold'>Завантажити Відео або Фото</p>
             <p className='text-md text-gray-400 mt-1'>Опублікуйте відео або фото у своєму обліковому записі</p>
           </div>
-          <div className='border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[400px] h-[500px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100'>
+          <div className='border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[400px] h-[500px] cursor-pointer hover:border-red-300 hover:bg-gray-100'>
             {isLoading ? (
               <p>Uploading...</p>
             ) : (
@@ -118,7 +116,7 @@ const Upload = () => {
                       <img
                         src={videoAsset.url}
                         alt="Uploaded Image"
-                        className="rounded-xl h-[250px] w-[300px] mt-5"
+                        className="rounded-xl p-2 w-[380px] h-[250px]"
                       />
                     ) : (
                       <video

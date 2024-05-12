@@ -9,14 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-toast": "^1.1.5",
     "@react-oauth/google": "^0.12.1",
     "@sanity/client": "6.17.2",
     "axios": "^0.27.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.3.1",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
     "uuidv4": "^6.2.13",
     "zustand": "^4.0.0-rc.1"
   },
