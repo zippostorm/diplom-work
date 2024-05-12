@@ -84,7 +84,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             <p className='mb-3 text-sm text-gray-400 '>Тег: #{post.topic}</p>
             {isImage(post.video.asset.url) ? (
               <img
-                className='lg:w-[700px] lg:h-[530px] md:h-[350px] md:w-[400px] w-[250px] h-[200px] cursor-pointer bg-gray-200'
+                className='lg:w-[560px] lg:h-[360px] md:h-[320px] md:w-[500px] w-[250px] h-[200px] cursor-pointer bg-gray-200'
                 src={post.video.asset.url}
                 alt="Uploaded Image"
               />
@@ -92,7 +92,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               <video
                 loop
                 ref={videoRef}
-                className='lg:w-[700px] lg:h-[530px] md:h-[350px] md:w-[400px] w-[250px] h-[200px] cursor-pointer bg-gray-200'
+                className='lg:w-[560px] lg:h-[360px] md:h-[320px] md:w-[500px] w-[250px] h-[200px] cursor-pointer bg-gray-200'
                 src={post.video.asset.url}
                 controls
               ></video>
