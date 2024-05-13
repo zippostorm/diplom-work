@@ -57,7 +57,7 @@ const Admin = () => {
   }
 
   return (
-    <div className='flex w-full h-full absolute left-0 top-[90px] mb-10 bg-[#F8F8F8]'>
+    <div className='flex w-full h-full absolute left-0 top-[88px] mb-10 bg-[#F8F8F8]'>
       <div className='bg-white rounded-lg h-[100%] w-[100%] flex flex-wrap gap-4 justify-start items-start'>
 
         {waitingPosts.length === 0 ? (
@@ -79,6 +79,7 @@ const Admin = () => {
                     </div>
                   </Link>
                 {post.caption && <p className="text-lg font-semibold">{post.caption}</p>}
+                {post._createdAt && <p className="text-sm text-gray-500">#{post._createdAt}</p>}
                 {post.topic && <p className="text-sm text-gray-500">#{post.topic}</p>}
               </div>
               <div className="flex gap-4">

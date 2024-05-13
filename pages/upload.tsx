@@ -85,9 +85,7 @@ const Upload = () => {
       await axios.post(`${BASE_URL}/api/post`, document);
       toast({
         title: "Ваш пост відправлений на перевірку. Очікуйте",
-        status: "success",
         duration: 8000,
-        isClosable: true,
       });
       setCaption('');
       setVideoAsset(undefined);
@@ -98,7 +96,7 @@ const Upload = () => {
   }
 
   return (
-    <div className='flex w-full h-full absolute left-0 top-[90px] mb-10 bg-[#F8F8F8] justify-center'>
+    <div className='flex w-full h-full absolute left-0 top-[88px] mb-10 bg-[#F8F8F8] justify-center'>
       <div className='bg-white rounded-lg xl:h-[100%] w-[100%] flex gap-6 flex-wrap justify-center items-center p-14 pt-6'>
         <div>
           <div className='ml-6'>

@@ -1,6 +1,7 @@
 export const allPostsQuery = () => {
   const query = `*[_type == "post"] | order(_createdAt desc){
     _id,
+    _createdAt,
      caption,
        video{
         asset->{
@@ -34,6 +35,7 @@ export const allPostsQuery = () => {
 export const postDetailQuery = (postId: string | string[]) => {
   const query = `*[_type == "post" && _id == '${postId}']{
     _id,
+    _createdAt,
      caption,
        video{
         asset->{
@@ -63,6 +65,7 @@ export const postDetailQuery = (postId: string | string[]) => {
 export const searchPostsQuery = (searchTerm: string | string[]) => {
   const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
     _id,
+    _createdAt,
      caption,
        video{
         asset->{
@@ -107,6 +110,7 @@ export const allUsersQuery = () => {
 export const userCreatedPostsQuery = (userId: string | string[]) => {
   const query = `*[ _type == 'post' && userId == '${userId}'] | order(_createdAt desc){
     _id,
+    _createdAt,
      caption,
        video{
         asset->{
@@ -141,6 +145,7 @@ export const userCreatedPostsQuery = (userId: string | string[]) => {
 export const userLikedPostsQuery = (userId: string | string[]) => {
   const query = `*[_type == 'post' && '${userId}' in likes[]._ref ] | order(_createdAt desc) {
     _id,
+    _createdAt,
      caption,
        video{
         asset->{
@@ -175,6 +180,7 @@ export const userLikedPostsQuery = (userId: string | string[]) => {
 export const topicPostsQuery = (topic: string | string[]) => {
   const query = `*[_type == "post" && topic match '${topic}*'] {
     _id,
+    _createdAt,
      caption,
        video{
         asset->{

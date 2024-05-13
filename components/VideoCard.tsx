@@ -39,8 +39,24 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
     return url.includes('.jpg') || url.includes('.jpeg') || url.includes('.png') || url.includes('.gif');
   }
 
+  const formatDate = (createdAt: string): string => {
+    const currentDate = new Date();
+    const postDate = new Date(createdAt);
+    const diff = Math.floor((currentDate.getTime() - postDate.getTime()) / 1000);
+  
+    if (diff < 60) {
+      return `${diff} секунд назад`;
+    } else if (diff < 3600) {
+      return `${Math.floor(diff / 60)} хвилин назад`;
+    } else if (diff < 86400) {
+      return `${Math.floor(diff / 3600)} годин назад`;
+    } else {
+      return `${Math.floor(diff / 86400)} днів назад`;
+    }
+  };
+
   if (post.status !== 'accepted') {
-    return null; // Якщо статус посту не "accepted", повертаємо null, щоб не рендерити компонент
+    return null;
   }
 
   return (
@@ -81,6 +97,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
           className='rounded-3xl'>
           <Link href={`/detail/${post._id}`}>
             <p className='mb-5'>{post.caption}</p>
+            <p className='text-sm text-gray-400'>{formatDate(post._createdAt)}</p>
             <p className='mb-3 text-sm text-gray-400 '>Тег: #{post.topic}</p>
             {isImage(post.video.asset.url) ? (
               <img

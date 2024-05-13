@@ -7,6 +7,7 @@ export interface Video {
     };
   };
   _id: string;
+  _createdAt: string;
   postedBy: {
     _id: string;
     userName: string;
