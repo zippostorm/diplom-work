@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { Video } from '../types';
 import { BASE_URL } from '../utils';
@@ -7,26 +7,10 @@ import useAuthStore from '../store/authStore';
 import Link from 'next/link';
 import NoResults from '../components/NoResults';
 
-const Admin = () => {
-  const [waitingPosts, setWaitingPosts] = useState<Video[]>([]);
-
+const Admin = ({ waitingPosts }: { waitingPosts: Video[] }) => {
+  const [posts, setPosts] = useState<Video[]>(waitingPosts);
   const videoRef = useRef<HTMLVideoElement>(null);
-
   const { userProfile }: any = useAuthStore();
-
-  useEffect(() => {
-    const fetchWaitingPosts = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/post`);
-        const filteredPosts = response.data.filter((post : Video) => post.status === 'waiting');
-        setWaitingPosts(filteredPosts);
-      } catch (error) {
-        console.error('Error fetching waiting posts:', error);
-      }
-    };
-
-    fetchWaitingPosts();
-  }, []);
 
   const isImage = (url: string): boolean => {
     return url.includes('.jpg') || url.includes('.jpeg') || url.includes('.png') || url.includes('.gif');
@@ -35,8 +19,8 @@ const Admin = () => {
   const handleAccept = async (postId: string) => {
     try {
       await axios.put(`${BASE_URL}/api/accept/${postId}`);
-      const updatedPosts = waitingPosts.filter(post => post._id !== postId);
-      setWaitingPosts(updatedPosts);
+      const updatedPosts = posts.filter(post => post._id !== postId);
+      setPosts(updatedPosts);
     } catch (error) {
       console.error('Error accepting post:', error);
     }
@@ -45,8 +29,8 @@ const Admin = () => {
   const handleDelete = async (postId: string) => {
     try {
       await axios.delete(`${BASE_URL}/api/accept/${postId}`);
-      const updatedPosts = waitingPosts.filter(post => post._id !== postId);
-      setWaitingPosts(updatedPosts);
+      const updatedPosts = posts.filter(post => post._id !== postId);
+      setPosts(updatedPosts);
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -60,10 +44,10 @@ const Admin = () => {
     <div className='flex w-full h-full absolute left-0 top-[88px] mb-10 bg-[#F8F8F8]'>
       <div className='bg-white rounded-lg h-[100%] w-[100%] flex flex-wrap gap-4 justify-start items-start'>
 
-        {waitingPosts.length === 0 ? (
+        {posts.length === 0 ? (
           <NoResults text='Немає постів які треба підтверджувати' />
         ) : (
-          waitingPosts.map(post => (
+          posts.map(post => (
             <div key={post._id} className="mt-[50px] ml-4 mr-4 border border-gray-200 p-4 rounded-lg shadow-md flex flex-col mb-4">
               <div className="mb-4">
                   <Link href={`/profile/${post.postedBy._id}`}>
@@ -110,5 +94,24 @@ const Admin = () => {
     </div>
   );
 };
+
+export const getServerSideProps = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/post`);
+    const filteredPosts = response.data.filter((post: Video) => post.status === 'waiting');
+    return {
+      props: {
+        waitingPosts: filteredPosts
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching waiting posts:', error);
+    return {
+      props: {
+        waitingPosts: []
+      }
+    };
+  }
+}
 
 export default Admin;
