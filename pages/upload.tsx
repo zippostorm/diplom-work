@@ -103,7 +103,7 @@ const Upload = () => {
             <p className='text-2xl font-bold'>Завантажити Відео або Фото</p>
             <p className='text-md text-gray-400 mt-1'>Опублікуйте відео або фото у своєму обліковому записі</p>
           </div>
-          <div className='border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[400px] h-[500px] cursor-pointer hover:border-red-300 hover:bg-gray-100'>
+          <div className='border-dashed rounded-xl border-4 border-gray-200 px-2 flex flex-col justify-center items-center outline-none mt-10 w-[400px] h-[500px] cursor-pointer hover:border-red-300 hover:bg-gray-100'>
             {isLoading ? (
               <p>Uploading...</p>
             ) : (

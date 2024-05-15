@@ -39,6 +39,11 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
     return url.includes('.jpg') || url.includes('.jpeg') || url.includes('.png') || url.includes('.gif');
   }
 
+  const pluralize = (count: number, words: string[]): string => {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return words[count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]];
+  };
+
   const formatDate = (createdAt: string): string => {
     const currentDate = new Date();
     const postDate = new Date(createdAt);
@@ -47,11 +52,14 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
     if (diff < 60) {
       return `${diff} секунд назад`;
     } else if (diff < 3600) {
-      return `${Math.floor(diff / 60)} хвилин назад`;
+      const minutes = Math.floor(diff / 60);
+      return `${minutes} ${pluralize(minutes, ['хвилину', 'хвилини', 'хвилин'])} назад`;
     } else if (diff < 86400) {
-      return `${Math.floor(diff / 3600)} годин назад`;
+      const hours = Math.floor(diff / 3600);
+      return `${hours} ${pluralize(hours, ['годину', 'години', 'годин'])} назад`;
     } else {
-      return `${Math.floor(diff / 86400)} днів назад`;
+      const days = Math.floor(diff / 86400);
+      return `${days} ${pluralize(days, ['день', 'дні', 'днів'])} назад`;
     }
   };
 
