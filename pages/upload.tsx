@@ -5,6 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
 import { SanityAssetDocument } from '@sanity/client';
 import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 import useAuthStore from '../store/authStore';
 import { client } from '../utils/client';
@@ -56,6 +57,12 @@ const Upload = () => {
       setIsLoading(false);
       setWrongFileType(true);
       console.log("Wrong File Type");
+      toast({
+        variant: "destructive",
+        title: "Помилка",
+        description: "Оберіть правильний формат файлу.",
+        duration: 4000,
+      })
     }
   }
 
@@ -92,6 +99,13 @@ const Upload = () => {
       setCategory(topics[0].name);
       setSavingPost(false);
       router.push("/");
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Помилка",
+        description: "Заповніть спочатку всі поля.",
+        duration: 4000,
+      })
     }
   }
 
@@ -157,11 +171,11 @@ const Upload = () => {
                 )}
               </div>
             )}
-            {wrongFileType && (
+            {/* {wrongFileType && (
               <p className='text-center text-xl text-red-400 font-semibold mt-4 w-[250px]'>
-                Будь-ласка виберіть відео файл
+                Будь-ласка правильний формат
               </p>
-            )}
+            )} */}
           </div>
 
 
