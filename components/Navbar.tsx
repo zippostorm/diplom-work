@@ -73,7 +73,7 @@ const Navbar = () => {
             <Link href="/upload">
               <button className='border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2'>
                 <IoMdAdd className='text-xl' /> {`  `}
-                <span className='hidden md:block'>Загрузити</span>
+                <span className='hidden md:block'>Завантажити</span>
               </button>
             </Link>
             {userProfile.image &&(
