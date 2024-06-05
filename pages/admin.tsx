@@ -45,7 +45,7 @@ const Admin = ({ waitingPosts }: { waitingPosts: Video[] }) => {
       <div className='bg-white rounded-lg h-[100%] w-[100%] flex flex-wrap gap-4 justify-start items-start'>
 
         {posts.length === 0 ? (
-          <NoResults text='Немає постів які треба підтверджувати' />
+          <NoResults text='Немає публікацій які треба підтверджувати' />
         ) : (
           posts.map(post => (
             <div key={post._id} className="mt-[50px] ml-4 mr-4 border border-gray-200 p-4 rounded-lg shadow-md flex flex-col mb-4">
@@ -84,8 +84,8 @@ const Admin = ({ waitingPosts }: { waitingPosts: Video[] }) => {
                 )}
               </div>
               <div className="flex justify-between mt-4">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleAccept(post._id)}>Пост</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleDelete(post._id)}>Удалити</button>
+                <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onClick={() => handleAccept(post._id)}>Додати</button>
+                <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={() => handleDelete(post._id)}>Видалити</button>
               </div>
             </div>
           ))

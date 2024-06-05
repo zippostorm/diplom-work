@@ -1,6 +1,6 @@
 export default {
   name: 'postedBy',
-  title: 'Posted By',
+  title: 'Опубліковано',
   type: 'reference',
   to: [{type: 'user'}],
 }

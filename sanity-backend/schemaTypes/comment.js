@@ -1,16 +1,16 @@
 export default {
   name: 'comment',
-  title: 'Comment',
+  title: 'Коментарі',
   type: 'document',
   fields: [
     {
       name: 'postedBy',
-      title: 'Posted By',
+      title: 'Опубліковано',
       type: 'postedBy',
     },
     {
       name: 'comment',
-      title: 'Comment',
+      title: 'Коментарь',
       type: 'string',
     },
   ],

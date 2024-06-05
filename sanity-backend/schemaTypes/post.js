@@ -1,16 +1,16 @@
 export default {
   name: 'post',
-  title: 'Post',
+  title: 'Публікації',
   type: 'document',
   fields: [
     {
       name: 'caption',
-      title: 'Caption',
+      title: 'Заголовок',
       type: 'string',
     },
     {
       name: 'video',
-      title: 'Video',
+      title: 'Публікації',
       type: 'file',
       options: {
         hotspot: true,
@@ -18,17 +18,17 @@ export default {
     },
     {
       name: 'userId',
-      title: 'UserId',
+      title: 'ID Користувача',
       type: 'string',
     },
     {
       name: 'postedBy',
-      title: 'PostedBy',
+      title: 'Опубліковано',
       type: 'postedBy',
     },
     {
       name: 'likes',
-      title: 'Likes',
+      title: 'Вподобання',
       type: 'array',
       of: [
         {
@@ -39,18 +39,18 @@ export default {
     },
     {
       name: 'comments',
-      title: 'Comments',
+      title: 'Коментарі',
       type: 'array',
       of: [{type: 'comment'}],
     },
     {
       name: 'topic',
-      title: 'Topic',
+      title: 'Тег',
       type: 'string',
     },
     {
       name: 'status',
-      title: 'Status',
+      title: 'Статус',
       type: 'string',
     },
   ],

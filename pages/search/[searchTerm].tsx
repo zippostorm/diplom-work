@@ -31,7 +31,7 @@ const Search = ({ videos }: { videos: Video[] }) => {
     <div className="w-full">
       <div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
         <p className={`text-xl font-semibold cursor-pointer mt-2 ${accounts}`} onClick={() => setIsAccounts(true)}>Акаунти</p>
-        <p className={`text-xl font-semibold cursor-pointer mt-2 ${isVideos}`} onClick={() => setIsAccounts(false)}>Пости</p>
+        <p className={`text-xl font-semibold cursor-pointer mt-2 ${isVideos}`} onClick={() => setIsAccounts(false)}>Публікації</p>
       </div>
       {isAccounts ? (
         <div className="md:mt-16">
@@ -65,7 +65,7 @@ const Search = ({ videos }: { videos: Video[] }) => {
       ) : (
         <div className="md:mt-16 flex flex-wrap gap-6 md:justify-start">
           {allWaiting ? (
-            <NoResults text={`Немає постів за запитом '${searchTerm}'`} />
+            <NoResults text={`Немає публікацій за запитом '${searchTerm}'`} />
           ) : (
             videos.length ? (
               videos.map((video: Video, idx) => (
@@ -73,7 +73,7 @@ const Search = ({ videos }: { videos: Video[] }) => {
                   <VideoCard post={video} key={idx} />
                 ) : null
               ))
-            ) : <NoResults text={`Немає постів за запитом '${searchTerm}'`} />
+            ) : <NoResults text={`Немає публікацій за запитом '${searchTerm}'`} />
           )}
         </div>
       )}

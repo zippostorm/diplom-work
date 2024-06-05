@@ -106,7 +106,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
           <Link href={`/detail/${post._id}`}>
             <p className='mb-5'>{post.caption}</p>
             <p className='text-sm text-gray-400'>{formatDate(post._createdAt)}</p>
-            <p className='mb-3 text-sm text-gray-400 '>Тег: #{post.topic}</p>
+            <p className='my-3 text-sm text-[#FF1997]'>Тег: #{post.topic}</p>
             {isImage(post.video.asset.url) ? (
               <img
                 className='lg:w-[560px] lg:h-[360px] md:h-[320px] md:w-[500px] w-[250px] h-[200px] cursor-pointer bg-gray-200'

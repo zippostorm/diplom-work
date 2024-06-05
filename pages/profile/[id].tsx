@@ -69,13 +69,13 @@ const Profile = ({ data }: IProps) => {
 
         <div className="flex gap-6 flex-wrap md:justify-start">
           {allWaiting ? (
-            <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} постів ще`} />
+            <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} публікацій ще`} />
           ) : (
             videosList.length > 0 ? (
               videosList.map((post: Video, idx: number) => (
                 <VideoCard post={post} key={idx} />
               ))
-            ) : <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} постів ще`} />
+            ) : <NoResults text={`Немає ${showUserVideos ? '' : 'Лайкнутих'} публікацій ще`} />
           )}
         </div>
       </div>

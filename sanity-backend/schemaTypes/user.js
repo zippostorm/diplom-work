@@ -1,21 +1,21 @@
 export default {
   name: 'user',
-  title: 'User',
+  title: 'Користувачі',
   type: 'document',
   fields: [
     {
       name: 'userName',
-      title: 'User Name',
+      title: 'Імʼя користувача',
       type: 'string',
     },
     {
       name: 'image',
-      title: 'Image',
+      title: 'Аватар',
       type: 'string',
     },
     {
       name: 'userType',
-      title: 'User Type',
+      title: 'Тип користувача',
       type: 'string',
       options: {
         list: ['user', 'admin', 'moderator'],

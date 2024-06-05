@@ -91,7 +91,7 @@ const Upload = () => {
 
       await axios.post(`${BASE_URL}/api/post`, document);
       toast({
-        title: "Ваш пост відправлений на перевірку. Очікуйте",
+        title: "Ваша публікація відправлена на перевірку. Очікуйте",
         duration: 8000,
       });
       setCaption('');
@@ -209,7 +209,7 @@ const Upload = () => {
                 type="button"
                 className='bg-[#F51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none'
               >
-                Запостити
+                Опублікувати
               </button>
             </div>
           </div>
